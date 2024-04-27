@@ -12,7 +12,7 @@ Implementing recaptcha with NextJS
 - [@didimojs](https://www.github.com/didimojs)
 
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://github.com/didimojs/sec-recaptcha-v3/blob/main/public/figma-page.png?raw=true)
 
 
 ### Getting Started
