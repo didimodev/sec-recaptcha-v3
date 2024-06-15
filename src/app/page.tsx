@@ -49,32 +49,26 @@ export default function LoginReCaptchaPage() {
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     if (!executeRecaptcha) {
-      toast.error('Erro ao verificar o ReCaptcha.')
+      toast.error('Erro ao verificar ReCaptcha.')
       return
     }
-    const gReCaptchaToken = await executeRecaptcha('inquirySubmit')
+    const token = await executeRecaptcha('loginSubmit')
+
     const response = await axios({
       method: 'post',
       url: '/api/recaptcha-verify',
       data: {
-        token: gReCaptchaToken,
+        token,
       },
       headers: {
         Accept: 'application/json, text/plain, */*',
         'Content-Type': 'application/json',
       },
     })
-
-    if (response?.data?.success === true) {
-      toast('Você passou no teste.', {
-        description: 'Sucesso!',
-        action: {
-          label: 'Ok',
-          onClick: () => console.log('Ok'),
-        },
-      })
+    if (response.data.success) {
+      toast.success(response.data.message)
     } else {
-      toast.error('Tentativas de acesso devem ser feitas manualmente.')
+      toast.error(response.data.error)
     }
   }
 
